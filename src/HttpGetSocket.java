@@ -14,7 +14,7 @@ public class HttpGetSocket {
 			pWriter.println("GET /" + requestURI + " HTTP/1.1");
 			pWriter.println("Accept: */*");
 			pWriter.println("Accpet-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7");
-			pWriter.println("User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)");
+			pWriter.println("User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT6.1; Trident/4.0)");
 			pWriter.println("Host: " + host);
 			pWriter.println("Connection: close");
 			pWriter.println("");
@@ -36,12 +36,11 @@ public class HttpGetSocket {
 
 		HttpGetSocket httpGetSocket = new HttpGetSocket();
 		httpGetSocket.requestGet("www.naver.com", 80, "");
-		// httpGetSocket.requestGet("search.naver.com", 80,
-		// "/search.naver?where=nexearch&query=영화+1987&sm=top_lve&ie=utf8");
+		httpGetSocket.requestGet("search.naver.com", 80,
+				"search.naver?where=nexearch&query=양예원&sm=top_lve&ie=utf8");
 
 	}
 
 }
 
 
-//

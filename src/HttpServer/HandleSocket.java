@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class HandleSocket {
+public class HandleSocket implements Runnable {
 
 	private final Socket socket;
 
@@ -25,6 +25,7 @@ public class HandleSocket {
 				InputStream in = socket.getInputStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));) {
 
+			System.out.println("ss");
 			String header = br.readLine();
 
 			String[] data = header.split(" ");
@@ -66,5 +67,10 @@ public class HandleSocket {
 		} catch (Exception e) {
 
 		}
+	}
+
+	@Override
+	public void run() {
+		makeResponse();
 	}
 }

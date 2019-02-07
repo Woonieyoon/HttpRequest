@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_191"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/fluent-hc-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpclient-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpclient-cache-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpclient-osgi-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpclient-win-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpcore-4.4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/httpmime-4.5.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/jna-4.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/notebiz0020/Documents/카카오톡 받은 파일/Desktop/lib/jna-platform-4.5.2.jar"/>
+	<classpathentry kind="lib" path="commons-io-2.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

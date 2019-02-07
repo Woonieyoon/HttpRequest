@@ -1,13 +1,8 @@
 package HttpServer;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 public class HandleSocket implements Runnable {
@@ -20,49 +15,39 @@ public class HandleSocket implements Runnable {
 
 	public void makeResponse() {
 
-		try (OutputStream out = socket.getOutputStream();
-				PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
-				InputStream in = socket.getInputStream();
+		try (InputStream in = socket.getInputStream();
 				BufferedReader br = new BufferedReader(new InputStreamReader(in));) {
 
-			System.out.println("ss");
 			String header = br.readLine();
-
 			String[] data = header.split(" ");
 			String path = data[1];
-			System.out.println(header);
 
-			File file = null;
-			FileInputStream fis = null;
+			// path는 절대경로, 상대경로가 있다.
+			// www.naver.com/index.html index.html은 디스크에 어디에 저장되어 있다.
+			// webroot가 필요
+			// c://webroot/index.html
 
-			if (path.endsWith(".html")) {
-				file = new File("C:/httpserver/index.html");
-				long fileLength = file.length();
-				pw.println("HTTP/1.1 200 OK");
-				pw.println("Content-Type: text/html; charset=UTF-8");
-				pw.println("Content-Length: " + fileLength);
-				pw.println("");
+			System.out.println(path);
+			String WebRoot = "C:/httpserver";
+
+			String fileName = path.substring(path.lastIndexOf("/"));
+			String[] fileNameAndExtension = fileName.split("\\.");
+			boolean hasExtenstion = fileNameAndExtension.length >= 2;
+
+			String extension = null;
+			if (hasExtenstion) {
+				extension = fileNameAndExtension[fileNameAndExtension.length - 1];
+			}
+
+			System.out.println(extension);
+
+			// 확장자가 없는 경우는 어떻게 할꺼니
+			if (!hasExtenstion || extension.equals("html")) {
+				new HtmlResponse(socket, WebRoot + path).execute();
+				// web_root + path
 			} else {
-				file = new File("C:/httpserver/Penguins.jpg");
-				long fileLength = file.length();
-				pw.println("HTTP/1.1 200 OK");
-				pw.println("Content-Type: image/jpeg");
-				pw.println("Content-Length: " + fileLength);
-				pw.println("");
+				new ImageResponse(socket, WebRoot + path).execute();
 			}
-			pw.flush();
-
-			fis = new FileInputStream(file);
-
-			byte[] b = new byte[1024];
-			int read = 0;
-			while ((read = fis.read(b)) != -1) {
-				out.write(b, 0, read);
-				System.out.println(read);
-				out.flush();
-			}
-
-			fis.close();
 
 		} catch (Exception e) {
 

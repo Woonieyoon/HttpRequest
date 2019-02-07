@@ -11,12 +11,19 @@ public class HttpServer {
 	private final int port;
 	private ServerSocket listener;
 	private ExecutorService executorService;
+	private Boolean init;
 
 	public HttpServer(int port) {
 		this.port = port;
+		init = false;
 	}
 
 	public void init() {
+
+		if (init) {
+			return;
+		}
+
 		try {
 			listener = new ServerSocket(port);
 			executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
@@ -31,10 +38,10 @@ public class HttpServer {
 			while (true) {
 				System.out.println("접속 대기중");
 				socket = listener.accept();
-				System.out.printf("New Client Connect! Connected IP : %s, Port : %d\n", socket.getInetAddress(),
+				System.out.printf("Connected IP : %s, Port : %d\n", socket.getInetAddress(),
 						socket.getPort());
-				HandleSocket s = new HandleSocket(socket);
-				executorService.submit(s);
+				HandleSocket handleSocket = new HandleSocket(socket);
+				executorService.submit(handleSocket);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,30 +54,3 @@ public class HttpServer {
 		httpServer.execute();
 	}
 }
-
-//
-//ServerSocket listener = null;
-//try {
-//	listener = new ServerSocket(8080);
-//	System.out.println("접속대기");
-//	while (true) {
-//		Socket socket = listener.accept();
-//		System.out.printf("New Client Connect! Connected IP : %s, Port : %d\n", socket.getInetAddress(),
-//				socket.getPort());
-//
-//		new Thread(() -> {
-//			try {
-//				new HandleSocket(socket).makeResponse();
-//			} catch (Exception ex) {
-//				ex.printStackTrace();
-//			}
-//		}).start();
-//	}
-//
-//} catch (Exception ex) {
-//	ex.printStackTrace();
-//	try {
-//		listener.close();
-//	} catch (Exception e) {
-//	}
-//}

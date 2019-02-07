@@ -7,6 +7,7 @@ import java.net.Socket;
 
 public class HandleSocket implements Runnable {
 
+	private final String WEB_ROOT = "C:/httpserver";
 	private final Socket socket;
 
 	public HandleSocket(Socket socket) {
@@ -27,9 +28,6 @@ public class HandleSocket implements Runnable {
 			// webroot가 필요
 			// c://webroot/index.html
 
-			System.out.println(path);
-			String WebRoot = "C:/httpserver";
-
 			String fileName = path.substring(path.lastIndexOf("/"));
 			String[] fileNameAndExtension = fileName.split("\\.");
 			boolean hasExtenstion = fileNameAndExtension.length >= 2;
@@ -43,10 +41,9 @@ public class HandleSocket implements Runnable {
 
 			// 확장자가 없는 경우는 어떻게 할꺼니
 			if (!hasExtenstion || extension.equals("html")) {
-				new HtmlResponse(socket, WebRoot + path).execute();
-				// web_root + path
+				new HtmlResponse().execute(socket, WEB_ROOT + path);
 			} else {
-				new ImageResponse(socket, WebRoot + path).execute();
+				new ImageResponse().execute(socket, WEB_ROOT + path);
 			}
 
 		} catch (Exception e) {

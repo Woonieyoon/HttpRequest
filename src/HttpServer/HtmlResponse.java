@@ -8,20 +8,15 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class HtmlResponse {
+public class HtmlResponse implements Executor {
 
-	private final String path;
-	private final Socket socket;
-	public HtmlResponse(Socket socket, String path) {
-		this.socket = socket;
-		this.path = path;
+	public HtmlResponse() {
 	}
 
-	public void execute() {
-
+	@Override
+	public void execute(Socket socket, String path) {
 		try (OutputStream out = socket.getOutputStream();
 				PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));) {
-
 
 			File file = new File(path);
 			long fileLength = file.length();

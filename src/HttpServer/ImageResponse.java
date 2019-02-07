@@ -8,18 +8,14 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ImageResponse {
+public class ImageResponse implements Executor {
 
-	private final String path;
-	private final Socket socket;
-
-	public ImageResponse(Socket socket, String path) {
-		this.socket = socket;
-		this.path = path;
+	public ImageResponse() {
 	}
 
-	public void execute() {
 
+	@Override
+	public void execute(Socket socket, String path) {
 		try (OutputStream out = socket.getOutputStream();
 				PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));) {
 
